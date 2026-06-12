@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class SpellInput : MonoBehaviour
+public class SpellSelector : MonoBehaviour
 {
     private PlayerInputActions _inputActions;
     //private SpellShooting _shootSpells;

@@ -86,7 +86,7 @@ public class PlayerRespawner : MonoBehaviour
     void Update()
     {
         #if UNITY_EDITOR
-        if (UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
+        if (UnityEngine.InputSystem.Keyboard.current.kKey.wasPressedThisFrame)
         {
             _health.Kill();
         }

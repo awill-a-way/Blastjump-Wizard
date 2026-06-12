@@ -4,11 +4,11 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System;
 
-public class SpellShooting : MonoBehaviour
+public class SpellShooter : MonoBehaviour
 {
     private PlayerCharacter _playerCharacter;
     private PlayerInputActions _inputActions;
-    private SpellInput _inputSpells;
+    private SpellSelector _selectSpells;
     private Melee melee;
     
     [SerializeField] private GameObject knockblastPrefab;
@@ -47,7 +47,7 @@ public class SpellShooting : MonoBehaviour
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
-        _inputSpells = GetComponent<SpellInput>();
+        _selectSpells = GetComponent<SpellSelector>();
 
         melee = GetComponent<Melee>();
 
@@ -77,10 +77,10 @@ public class SpellShooting : MonoBehaviour
 
     void LateUpdate()
     {
-        if (_inputSpells.currentSpell != previousSpell)
+        if (_selectSpells.currentSpell != previousSpell)
         {
             spellCharge = 1f;
-            previousSpell = _inputSpells.currentSpell;
+            previousSpell = _selectSpells.currentSpell;
         }
     }
 
@@ -124,18 +124,18 @@ public class SpellShooting : MonoBehaviour
             if (melee.canMelee == true)
             {
                 melee.Strike();
-                _inputSpells.inputStunTimer = _inputSpells.inputStunTime;
+                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
             }
         }
         
-        if (input.Fire1.IsPressed() && _inputSpells.currentSpell != "No Spell")
+        if (input.Fire1.IsPressed() && _selectSpells.currentSpell != "No Spell")
         {
             if (canShoot == true)
             {
                 canShoot = false; // prevent shooting again until the stun duration is over (may have to move for charged attacks)
                 CastSpell();
                 
-                _inputSpells.inputStunTimer = _inputSpells.inputStunTime;
+                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
                 StopCoroutine(melee.resetRoutine);
                 melee.PutMeleeOnCooldown(0.25f);
             }
@@ -143,7 +143,7 @@ public class SpellShooting : MonoBehaviour
         
         if (input.Fire2.IsPressed())
         {
-            if (_inputSpells.currentSpell == "No Spell")
+            if (_selectSpells.currentSpell == "No Spell")
             {
                 
             }
@@ -158,58 +158,58 @@ public class SpellShooting : MonoBehaviour
             requestingAltCast = false;
         }
 
-        if ((input.Fire1.IsPressed() && _inputSpells.currentSpell == "No Spell") || input.QuickMelee.IsPressed())
+        if ((input.Fire1.IsPressed() && _selectSpells.currentSpell == "No Spell") || input.QuickMelee.IsPressed())
         {
             if (melee.canMelee == true)
             {
                 melee.Strike();
-                _inputSpells.inputStunTimer = _inputSpells.inputStunTime;
+                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
             }
         }
     }
 
     void CastSpell()
     {
-        if (_inputSpells.currentSpell == "Knockblast" && mana >= 10)
+        if (_selectSpells.currentSpell == "Knockblast" && mana >= 10)
             {
                 StartCoroutine(ShootProjectile("Knockblast", 50f+5f*spellCharge));
                 EveryCastDoesThis(10,1.5f);
             }
-        else if (_inputSpells.currentSpell == "Mana Cube" && mana >= 25)
+        else if (_selectSpells.currentSpell == "Mana Cube" && mana >= 25)
             {
-                StartCoroutine(ShootProjectile("Mana Cube", 25f));
-                EveryCastDoesThis(5,5);
+                StartCoroutine(ShootProjectile("Mana Cube", 5f));
+                EveryCastDoesThis(25,0.5f);
             }
-        else if (_inputSpells.currentSpell == "Glyph of Volatility" && mana >= 20)
+        else if (_selectSpells.currentSpell == "Glyph of Volatility" && mana >= 20)
             {
                 StartCoroutine(ShootProjectile("Glyph of Volatility", 0));
                 EveryCastDoesThis(20,2);
             }
-        else if (_inputSpells.currentSpell == "Lightning Bolt" && mana >= 10)
+        else if (_selectSpells.currentSpell == "Lightning Bolt" && mana >= 10)
             {
                 EveryCastDoesThis(10,2);
             }
-        else if (_inputSpells.currentSpell == "Ice Shard" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Ice Shard" && mana >= 15)
             {
                 StartCoroutine(ShootProjectile("Ice Shard", 50f));
                 EveryCastDoesThis(15,2);
             }
-        else if (_inputSpells.currentSpell == "Snowball" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Snowball" && mana >= 15)
             {
                 StartCoroutine(ShootProjectile("Snowball", 30f));
                 EveryCastDoesThis(15,2);
             }
-        else if (_inputSpells.currentSpell == "Polymorph: Disc" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Polymorph: Disc" && mana >= 15)
             if (floatingDiscCount < 3)
             {
-                Polymorph("Disc", 20f, 15f);
+                Polymorph("Disc", 20f, 15f+spellCharge);
                 EveryCastDoesThis(0f,2); //the manacost is on the polymorph() method
             }
             else
             {
                 Debug.Log(floatingDiscCount+" is too many floating discs to create another, cast failed!");
             }
-        else if (_inputSpells.currentSpell == "Heal" && mana >= 30)
+        else if (_selectSpells.currentSpell == "Heal" && mana >= 30)
             {
                 var health = GetComponentInParent<HealthSystem>();
                 if (health != null && health.CurrentHealth != 100f) //max health check
@@ -220,39 +220,43 @@ public class SpellShooting : MonoBehaviour
                 }
                 StartCoroutine(ResetCanShoot(2));
             }
-        else if (_inputSpells.currentSpell == "Shield" && mana >= 20)
+        else if (_selectSpells.currentSpell == "Shield" && mana >= 20)
             {
                 shieldTimer = 5f; // shield lasts for 5 seconds
                 EveryCastDoesThis(20,2);
             }
-        else if (_inputSpells.currentSpell == "Vine Grapple" && mana >= 25)
+        else if (_selectSpells.currentSpell == "Vine Grapple" && mana >= 25)
             {
                 EveryCastDoesThis(25,2);
             }
-        else if (_inputSpells.currentSpell == "Psionic Grasp" && mana >=1)
+        else if (_selectSpells.currentSpell == "Psionic Grasp" && mana >=1)
             {
                 //Put in the half life phys gun basically
                 mana -= Time.deltaTime;
                 manaRegenStunTimer = 0.5f;
                 timeSinceShot = 0f;
-                _inputSpells.inputStunTimer = _inputSpells.inputStunTime;
-                _inputSpells.spellResetTimer = 10f;
+                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
+                _selectSpells.spellResetTimer = 10f;
             }
-        else if (_inputSpells.currentSpell != "No Spell")
+        else if (_selectSpells.currentSpell != "No Spell")
             {
                 Debug.Log("Not enough mana to cast " + currentSpell + "! Remaining Mana: " + (mana));
-                _inputSpells.spellResetTimer = 10f;
+                _selectSpells.spellResetTimer = 10f;
                 StartCoroutine(ResetCanShoot(2));
             }
     }
 
     void AltCastSpell()
     {
-        if (_inputSpells.currentSpell == "Knockblast" || _inputSpells.currentSpell == "Mana Cube")
+        
+        if  (mana > 0f)
         {
-            mana -= 5f*Time.deltaTime;
-            spellCharge += Time.deltaTime;
-            manaRegenStunTimer = 0.5f;
+            if (_selectSpells.currentSpell == "Knockblast" || _selectSpells.currentSpell == "Mana Cube" || _selectSpells.currentSpell == "Polymorph: Disc")
+            {
+                mana -= 5f*Time.deltaTime;
+                spellCharge += Time.deltaTime;
+                manaRegenStunTimer = 0.5f;
+            }
         }
     }
 
@@ -261,9 +265,9 @@ public class SpellShooting : MonoBehaviour
         StartCoroutine(ResetCanShoot(fireRate));
         mana -= manaCost;
         timeSinceShot = 0f;
-        _inputSpells.inputStunTimer = _inputSpells.inputStunTime;
-        _inputSpells.spellResetTimer = 10f;
-        Debug.Log("Casting "+ _inputSpells.currentSpell + "! Remaining Mana: " + (mana));
+        _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
+        _selectSpells.spellResetTimer = 10f;
+        Debug.Log("Casting "+ _selectSpells.currentSpell + "! Remaining Mana: " + (mana));
     }
 
     IEnumerator ShootProjectile(string spellName, float launchForce)
