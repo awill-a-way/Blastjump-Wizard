@@ -817,6 +817,8 @@ MonoBehaviour:
   spellResetTimer: 1
   currentSpell: 
   gameSpeedDuringSpellInput: 0.25
+  previousSpell: No Spell
+  prevSpellEnabled: 1
 --- !u!114 &6568793167824195744
 MonoBehaviour:
   m_ObjectHideFlags: 0

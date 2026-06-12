@@ -129,7 +129,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Open Spellbook"",
+                    ""name"": ""Spellbook"",
                     ""type"": ""Button"",
                     ""id"": ""bc993b37-68c5-4442-a6c9-8e1ace2261e6"",
                     ""expectedControlType"": """",
@@ -204,6 +204,51 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""QuickMelee"",
                     ""type"": ""Button"",
                     ""id"": ""b4f1342e-f09a-47ad-8174-37afb016555e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PrevSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc56237e-edc5-4fda-a655-64d591d62b5d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltSpellUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""063fe400-9107-4914-8e65-905afd27798f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltSpellDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""47c5f29c-040d-42e5-a15e-75fd096c8276"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltSpellLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""03fe39ff-c1f2-46ea-8c00-95847a9b1661"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltSpellRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e6f2c79-92ae-4b65-8842-209e6aee897f"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -302,18 +347,29 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b27036bf-8b8b-4123-be1b-abf0fb9a5435"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spellbook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c798c20b-622e-4d2c-9dfc-0446da3e4e60"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Open Spellbook"",
+                    ""action"": ""Spellbook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""ca5e93b0-dc60-4285-aa6d-785e58e7b2a5"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -408,6 +464,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""QuickMelee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""404f87bc-ae28-45f0-8c39-08ea55e933e7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PrevSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d72a7a11-1eef-4207-974e-1f7922e9f4e1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltSpellUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2614618f-5e59-4bea-936c-5e1d8b34a3cf"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltSpellDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f25ce11f-7f1d-4c86-b3e3-5a0937cad037"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltSpellLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dacb6f29-3371-47db-ad7f-cec1f47045ad"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltSpellRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -420,7 +531,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Fire1 = m_Gameplay.FindAction("Fire1", throwIfNotFound: true);
         m_Gameplay_Fire2 = m_Gameplay.FindAction("Fire2", throwIfNotFound: true);
-        m_Gameplay_OpenSpellbook = m_Gameplay.FindAction("Open Spellbook", throwIfNotFound: true);
+        m_Gameplay_Spellbook = m_Gameplay.FindAction("Spellbook", throwIfNotFound: true);
         m_Gameplay_Crouch = m_Gameplay.FindAction("Crouch", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_SpellUp = m_Gameplay.FindAction("SpellUp", throwIfNotFound: true);
@@ -429,6 +540,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_SpellRight = m_Gameplay.FindAction("SpellRight", throwIfNotFound: true);
         m_Gameplay_ResetSpell = m_Gameplay.FindAction("ResetSpell", throwIfNotFound: true);
         m_Gameplay_QuickMelee = m_Gameplay.FindAction("QuickMelee", throwIfNotFound: true);
+        m_Gameplay_PrevSpell = m_Gameplay.FindAction("PrevSpell", throwIfNotFound: true);
+        m_Gameplay_AltSpellUp = m_Gameplay.FindAction("AltSpellUp", throwIfNotFound: true);
+        m_Gameplay_AltSpellDown = m_Gameplay.FindAction("AltSpellDown", throwIfNotFound: true);
+        m_Gameplay_AltSpellLeft = m_Gameplay.FindAction("AltSpellLeft", throwIfNotFound: true);
+        m_Gameplay_AltSpellRight = m_Gameplay.FindAction("AltSpellRight", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -513,7 +629,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Fire1;
     private readonly InputAction m_Gameplay_Fire2;
-    private readonly InputAction m_Gameplay_OpenSpellbook;
+    private readonly InputAction m_Gameplay_Spellbook;
     private readonly InputAction m_Gameplay_Crouch;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_SpellUp;
@@ -522,6 +638,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_SpellRight;
     private readonly InputAction m_Gameplay_ResetSpell;
     private readonly InputAction m_Gameplay_QuickMelee;
+    private readonly InputAction m_Gameplay_PrevSpell;
+    private readonly InputAction m_Gameplay_AltSpellUp;
+    private readonly InputAction m_Gameplay_AltSpellDown;
+    private readonly InputAction m_Gameplay_AltSpellLeft;
+    private readonly InputAction m_Gameplay_AltSpellRight;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -550,9 +671,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Fire2 => m_Wrapper.m_Gameplay_Fire2;
         /// <summary>
-        /// Provides access to the underlying input action "Gameplay/OpenSpellbook".
+        /// Provides access to the underlying input action "Gameplay/Spellbook".
         /// </summary>
-        public InputAction @OpenSpellbook => m_Wrapper.m_Gameplay_OpenSpellbook;
+        public InputAction @Spellbook => m_Wrapper.m_Gameplay_Spellbook;
         /// <summary>
         /// Provides access to the underlying input action "Gameplay/Crouch".
         /// </summary>
@@ -585,6 +706,26 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/QuickMelee".
         /// </summary>
         public InputAction @QuickMelee => m_Wrapper.m_Gameplay_QuickMelee;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/PrevSpell".
+        /// </summary>
+        public InputAction @PrevSpell => m_Wrapper.m_Gameplay_PrevSpell;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AltSpellUp".
+        /// </summary>
+        public InputAction @AltSpellUp => m_Wrapper.m_Gameplay_AltSpellUp;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AltSpellDown".
+        /// </summary>
+        public InputAction @AltSpellDown => m_Wrapper.m_Gameplay_AltSpellDown;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AltSpellLeft".
+        /// </summary>
+        public InputAction @AltSpellLeft => m_Wrapper.m_Gameplay_AltSpellLeft;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/AltSpellRight".
+        /// </summary>
+        public InputAction @AltSpellRight => m_Wrapper.m_Gameplay_AltSpellRight;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -623,9 +764,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Fire2.started += instance.OnFire2;
             @Fire2.performed += instance.OnFire2;
             @Fire2.canceled += instance.OnFire2;
-            @OpenSpellbook.started += instance.OnOpenSpellbook;
-            @OpenSpellbook.performed += instance.OnOpenSpellbook;
-            @OpenSpellbook.canceled += instance.OnOpenSpellbook;
+            @Spellbook.started += instance.OnSpellbook;
+            @Spellbook.performed += instance.OnSpellbook;
+            @Spellbook.canceled += instance.OnSpellbook;
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
@@ -650,6 +791,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @QuickMelee.started += instance.OnQuickMelee;
             @QuickMelee.performed += instance.OnQuickMelee;
             @QuickMelee.canceled += instance.OnQuickMelee;
+            @PrevSpell.started += instance.OnPrevSpell;
+            @PrevSpell.performed += instance.OnPrevSpell;
+            @PrevSpell.canceled += instance.OnPrevSpell;
+            @AltSpellUp.started += instance.OnAltSpellUp;
+            @AltSpellUp.performed += instance.OnAltSpellUp;
+            @AltSpellUp.canceled += instance.OnAltSpellUp;
+            @AltSpellDown.started += instance.OnAltSpellDown;
+            @AltSpellDown.performed += instance.OnAltSpellDown;
+            @AltSpellDown.canceled += instance.OnAltSpellDown;
+            @AltSpellLeft.started += instance.OnAltSpellLeft;
+            @AltSpellLeft.performed += instance.OnAltSpellLeft;
+            @AltSpellLeft.canceled += instance.OnAltSpellLeft;
+            @AltSpellRight.started += instance.OnAltSpellRight;
+            @AltSpellRight.performed += instance.OnAltSpellRight;
+            @AltSpellRight.canceled += instance.OnAltSpellRight;
         }
 
         /// <summary>
@@ -673,9 +829,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Fire2.started -= instance.OnFire2;
             @Fire2.performed -= instance.OnFire2;
             @Fire2.canceled -= instance.OnFire2;
-            @OpenSpellbook.started -= instance.OnOpenSpellbook;
-            @OpenSpellbook.performed -= instance.OnOpenSpellbook;
-            @OpenSpellbook.canceled -= instance.OnOpenSpellbook;
+            @Spellbook.started -= instance.OnSpellbook;
+            @Spellbook.performed -= instance.OnSpellbook;
+            @Spellbook.canceled -= instance.OnSpellbook;
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
@@ -700,6 +856,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @QuickMelee.started -= instance.OnQuickMelee;
             @QuickMelee.performed -= instance.OnQuickMelee;
             @QuickMelee.canceled -= instance.OnQuickMelee;
+            @PrevSpell.started -= instance.OnPrevSpell;
+            @PrevSpell.performed -= instance.OnPrevSpell;
+            @PrevSpell.canceled -= instance.OnPrevSpell;
+            @AltSpellUp.started -= instance.OnAltSpellUp;
+            @AltSpellUp.performed -= instance.OnAltSpellUp;
+            @AltSpellUp.canceled -= instance.OnAltSpellUp;
+            @AltSpellDown.started -= instance.OnAltSpellDown;
+            @AltSpellDown.performed -= instance.OnAltSpellDown;
+            @AltSpellDown.canceled -= instance.OnAltSpellDown;
+            @AltSpellLeft.started -= instance.OnAltSpellLeft;
+            @AltSpellLeft.performed -= instance.OnAltSpellLeft;
+            @AltSpellLeft.canceled -= instance.OnAltSpellLeft;
+            @AltSpellRight.started -= instance.OnAltSpellRight;
+            @AltSpellRight.performed -= instance.OnAltSpellRight;
+            @AltSpellRight.canceled -= instance.OnAltSpellRight;
         }
 
         /// <summary>
@@ -769,12 +940,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFire2(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Open Spellbook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Spellbook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnOpenSpellbook(InputAction.CallbackContext context);
+        void OnSpellbook(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crouch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -831,5 +1002,40 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnQuickMelee(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "PrevSpell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPrevSpell(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AltSpellUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAltSpellUp(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AltSpellDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAltSpellDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AltSpellLeft" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAltSpellLeft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AltSpellRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAltSpellRight(InputAction.CallbackContext context);
     }
 }

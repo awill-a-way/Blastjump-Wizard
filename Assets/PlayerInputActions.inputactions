@@ -43,7 +43,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Open Spellbook",
+                    "name": "Spellbook",
                     "type": "Button",
                     "id": "bc993b37-68c5-4442-a6c9-8e1ace2261e6",
                     "expectedControlType": "",
@@ -118,6 +118,51 @@
                     "name": "QuickMelee",
                     "type": "Button",
                     "id": "b4f1342e-f09a-47ad-8174-37afb016555e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrevSpell",
+                    "type": "Button",
+                    "id": "dc56237e-edc5-4fda-a655-64d591d62b5d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AltSpellUp",
+                    "type": "Button",
+                    "id": "063fe400-9107-4914-8e65-905afd27798f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AltSpellDown",
+                    "type": "Button",
+                    "id": "47c5f29c-040d-42e5-a15e-75fd096c8276",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AltSpellLeft",
+                    "type": "Button",
+                    "id": "03fe39ff-c1f2-46ea-8c00-95847a9b1661",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AltSpellRight",
+                    "type": "Button",
+                    "id": "0e6f2c79-92ae-4b65-8842-209e6aee897f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -216,18 +261,29 @@
                 {
                     "name": "",
                     "id": "b27036bf-8b8b-4123-be1b-abf0fb9a5435",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spellbook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c798c20b-622e-4d2c-9dfc-0446da3e4e60",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Open Spellbook",
+                    "action": "Spellbook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "ca5e93b0-dc60-4285-aa6d-785e58e7b2a5",
-                    "path": "<Keyboard>/ctrl",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -320,6 +376,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "QuickMelee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "404f87bc-ae28-45f0-8c39-08ea55e933e7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrevSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72a7a11-1eef-4207-974e-1f7922e9f4e1",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltSpellUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2614618f-5e59-4bea-936c-5e1d8b34a3cf",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltSpellDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f25ce11f-7f1d-4c86-b3e3-5a0937cad037",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltSpellLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dacb6f29-3371-47db-ad7f-cec1f47045ad",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltSpellRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

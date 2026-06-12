@@ -36,7 +36,7 @@ public class SpellShooter : MonoBehaviour
     public bool manaRegenEnabled = true;
     private float manaRegenStunTimer = 0f;
     public string currentSpell = "";
-    private string previousSpell = "";
+    private string tempPreviousSpell = "";
     private Vector3 projectileDestination;
     private bool rightHand = true;
     public static float floatingDiscCount = 0f;
@@ -62,7 +62,10 @@ public class SpellShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ShootCheck();
+        if (_inputActions.Gameplay.Spellbook.IsPressed() == false)
+        {
+            AttackCheck();
+        }
         
         mana = Mathf.Min(mana, manaMax);
 
@@ -77,10 +80,10 @@ public class SpellShooter : MonoBehaviour
 
     void LateUpdate()
     {
-        if (_selectSpells.currentSpell != previousSpell)
+        if (_selectSpells.currentSpell != tempPreviousSpell)
         {
-            spellCharge = 1f;
-            previousSpell = _selectSpells.currentSpell;
+            spellCharge = 0f;
+            tempPreviousSpell = _selectSpells.currentSpell;
         }
     }
 
@@ -115,7 +118,7 @@ public class SpellShooter : MonoBehaviour
         }
     }
 
-    void ShootCheck()
+    void AttackCheck()
     {
         var input = _inputActions.Gameplay;
         

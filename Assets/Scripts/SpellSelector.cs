@@ -18,9 +18,13 @@ public class SpellSelector : MonoBehaviour
     [SerializeField] public float inputStunTime = 0.5f;
     [Space]
     public float spellResetTimer = 1f;
-    public string currentSpell = "";
     [Range(0.1f,1)] // A value of 1 essentially disables the gameslow mechanic
     [SerializeField] private float gameSpeedDuringSpellInput = 0.5f;
+    [Space]
+    public string currentSpell = "";
+    [SerializeField] private string previousSpell = "No Spell";
+    [SerializeField] private bool prevSpellEnabled;
+    [SerializeField] private bool altSpellInputsEnabled;
 
 
 
@@ -48,6 +52,14 @@ public class SpellSelector : MonoBehaviour
             if (input.SpellDown.WasPressedThisFrame()) AddInput("D");
             if (input.SpellLeft.WasPressedThisFrame()) AddInput("L");
             if (input.SpellRight.WasPressedThisFrame()) AddInput("R");
+
+            if (input.Spellbook.IsPressed() == true || altSpellInputsEnabled == true)
+            {
+                if (input.AltSpellUp.WasPressedThisFrame()) AddInput("U");
+                if (input.AltSpellDown.WasPressedThisFrame()) AddInput("D");
+                if (input.AltSpellLeft.WasPressedThisFrame()) AddInput("L");
+                if (input.AltSpellRight.WasPressedThisFrame()) AddInput("R");
+            }
         }
 
         if (input.ResetSpell.WasPressedThisFrame()) // reset input buffer and current spell when the "reset spell" button (R) is pressed
@@ -83,8 +95,7 @@ public class SpellSelector : MonoBehaviour
 
 
 
-        if (inputBufferResetTimer > 0f && Time.timeScale != 0f)
-            inputBufferResetTimer -= Time.deltaTime/Time.timeScale;
+        if (inputBufferResetTimer > 0f && Time.timeScale != 0f) inputBufferResetTimer -= Time.deltaTime/Time.timeScale;
     
         if (inputBufferResetTimer <= 0f && inputBuffer.Count > 0)
         {
@@ -92,13 +103,19 @@ public class SpellSelector : MonoBehaviour
             Debug.Log("Input Timer reached zero, Input Buffer Cleared");
         }
 
-        if (inputBuffer.Count > 0)
+        if (inputBuffer.Count > 0 || input.Spellbook.IsPressed() == true)
         {
             Time.timeScale = gameSpeedDuringSpellInput;
         }
         else
         {
             Time.timeScale = 1;
+        }
+
+        if (input.PrevSpell.WasPressedThisFrame() == true && prevSpellEnabled == true)
+        {
+            SelectSpell(previousSpell);
+            Debug.Log("Swapped to previous spell!");
         }
     }
 
@@ -109,7 +126,13 @@ public class SpellSelector : MonoBehaviour
             inputBuffer.Add(_input);
             inputBufferResetTimer = inputBufferResetTime; // reset the timer whenever a new input is added
             Debug.Log("Input Buffer: " + string.Join(", ", inputBuffer));
+
+            if (currentSpell != "No Spell" && currentSpell != "")
+            {
+                previousSpell = currentSpell;
+            }
             currentSpell = "No Spell";
+
             CheckSpell();
         }
     }
@@ -120,58 +143,47 @@ public class SpellSelector : MonoBehaviour
 
         if(spell == "RRUU")
         {
-            currentSpell = "Knockblast";
-            EverySelectDoesThis();
+            SelectSpell("Knockblast");
         }
-        if(spell == "DRRR")
+        else if(spell == "DRRR")
         {
-            currentSpell = "Mana Cube";
-            EverySelectDoesThis();
-        }
-        else if (spell == "RRDU")
-        {
-            currentSpell = "Glyph of Volatility";
-            EverySelectDoesThis();
-        }
-        else if (spell == "LRUU")
-        {
-            currentSpell = "Lightning Bolt";
-            EverySelectDoesThis();
-        }
-        else if (spell == "RRRR")
-        {
-            currentSpell = "Ice Shard";
-            EverySelectDoesThis();
-        }
-        else if (spell == "URDL")
-        {
-            currentSpell = "Snowball";
-            EverySelectDoesThis();
+            SelectSpell("Mana Cube");
         }
         else if (spell == "LLRR")
         {
-            currentSpell = "Polymorph: Disc";
-            EverySelectDoesThis();
+            SelectSpell("Polymorph: Disc");
+        }
+        else if (spell == "RRDU")
+        {
+            SelectSpell("Glyph of Volatility");
+        }
+        else if (spell == "URURUR")
+        {
+            SelectSpell("Lightning Bolt");
+        }
+        else if (spell == "RRRR")
+        {
+            SelectSpell("Ice Shard");
+        }
+        else if (spell == "URDL")
+        {
+            SelectSpell("Snowball");
         }
         else if (spell == "LUUR")
         {
-            currentSpell = "Heal";
-            EverySelectDoesThis();
+            SelectSpell("Heal");
         }
         else if (spell == "LRLR")
         {
-            currentSpell = "Shield";
-            EverySelectDoesThis();
+            SelectSpell("Shield");
         }
         else if (spell == "RRRL")
         {
-            currentSpell = "Vine Grapple";
-            EverySelectDoesThis();
+            SelectSpell("Vine Grapple");
         }
         else if (spell == "UULR")
         {
-            currentSpell = "Psionic Grasp";
-            EverySelectDoesThis();
+            SelectSpell("Psionic Grasp");
         }
         else if (spell.Length >= 6)
         {
@@ -180,12 +192,17 @@ public class SpellSelector : MonoBehaviour
         }
     }
 
-    void EverySelectDoesThis()
+    void SelectSpell(string spellName)
     {
-        Debug.Log(currentSpell+" Selected!");
+        if (currentSpell != "No Spell" && currentSpell != "")
+        {
+            previousSpell = currentSpell;
+        }
+        currentSpell = spellName;
+        
+        Debug.Log(currentSpell+" Selected! Previous spell was "+previousSpell);
         inputBuffer.Clear();
         inputStunTimer = inputStunTime;
         //spellResetTimer = 10f;
     }
-
 }

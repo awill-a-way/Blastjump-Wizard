@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
 {
@@ -47,17 +48,26 @@ public class Player : MonoBehaviour
         playerCamera.UpdateRotation(cameraInput);
 
         //Get character input and update it
-        var characterInput = new CharacterInput
+        var characterInput = new CharacterInput();
+        //
+        if (input.Spellbook.IsPressed() == false)
         {
             //Movement
-            Rotation = playerCamera.transform.rotation,
-            Move = input.Move.ReadValue<Vector2>(),
-            Jump = input.Jump.WasPressedThisFrame(),
-            JumpSustain = input.Jump.IsPressed(),
-            Crouch = input.Crouch.WasPressedThisFrame()
-                ? CrouchInput.Toggle
-                : CrouchInput.None,
-        };
+            characterInput.Rotation = playerCamera.transform.rotation;
+            characterInput.Move = input.Move.ReadValue<Vector2>();
+            characterInput.Jump = input.Jump.WasPressedThisFrame();
+            characterInput.JumpSustain = input.Jump.IsPressed();
+        }
+        else if (input.Spellbook.IsPressed() == true)
+        {
+            characterInput.Move = Vector2.zero;
+            characterInput.Jump = false;
+            characterInput.JumpSustain = false;
+        }
+        characterInput.Crouch = input.Crouch.WasPressedThisFrame()
+            ? CrouchInput.Toggle
+            : CrouchInput.None;
+
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);
 
