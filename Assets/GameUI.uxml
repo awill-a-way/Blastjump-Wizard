@@ -1,0 +1,3 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="HealthBarBackground" style="flex-grow: 1; position: absolute; width: 500px; height: 150px; top: 530px; left: 0; background-image: url(&quot;project://database/Assets/HealthbarBackground.png?fileID=2800000&amp;guid=e987b1dd6fa04f444811976ef84e5d2d&amp;type=3#HealthbarBackground&quot;);"/>
+</ui:UXML>
