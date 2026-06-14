@@ -10,6 +10,7 @@ public class SpellShooter : MonoBehaviour
     private PlayerInputActions _inputActions;
     private SpellSelector _selectSpells;
     private Melee melee;
+    private HUDController HUD;
     
     [SerializeField] private GameObject knockblastPrefab;
     [SerializeField] private GameObject manaCubePrefab;
@@ -29,8 +30,8 @@ public class SpellShooter : MonoBehaviour
     private float currentSpellTimer;
     public float shieldTimer;
     [Range(0, 100)]
-    public float mana = 100;
-    private float manaMax = 100;
+    public float currentMana = 100;
+    private float maxMana = 100;
     private float baseManaRegenRate = 5;
     private float manaRegenModifier = 0f;
     public bool manaRegenEnabled = true;
@@ -52,6 +53,8 @@ public class SpellShooter : MonoBehaviour
         melee = GetComponent<Melee>();
 
         spellCharge = 1f;
+
+        HUD = GetComponentInChildren<HUDController>();
     }
 
     void OnDestroy()
@@ -67,7 +70,7 @@ public class SpellShooter : MonoBehaviour
             AttackCheck();
         }
         
-        mana = Mathf.Min(mana, manaMax);
+        currentMana = Mathf.Min(currentMana, maxMana);
 
         if (timeSinceShot > 5f)
         {
@@ -76,6 +79,8 @@ public class SpellShooter : MonoBehaviour
 
         Mathf.Clamp(spellCharge, 1, 10);
         Mathf.Clamp(timeSinceShot, 0, 50);
+
+        HUD.UpdateManaUI(currentMana, maxMana);
     }
 
     void LateUpdate()
@@ -89,10 +94,10 @@ public class SpellShooter : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Regen mana if below max
-        if (mana < manaMax && manaRegenEnabled == true)
+        //Regen currentMana if below max
+        if (currentMana < maxMana && manaRegenEnabled == true)
         {
-            mana += (baseManaRegenRate + manaRegenModifier) * Time.deltaTime; // regenerate mana over time
+            currentMana += (baseManaRegenRate + manaRegenModifier) * Time.deltaTime; // regenerate currentMana over time
         }
 
         //Measure time since the last successful shot
@@ -173,36 +178,36 @@ public class SpellShooter : MonoBehaviour
 
     void CastSpell()
     {
-        if (_selectSpells.currentSpell == "Knockblast" && mana >= 10)
+        if (_selectSpells.currentSpell == "Knockblast" && currentMana >= 10)
             {
                 StartCoroutine(ShootProjectile("Knockblast", 50f+5f*spellCharge));
                 EveryCastDoesThis(10,1.5f);
             }
-        else if (_selectSpells.currentSpell == "Mana Cube" && mana >= 25)
+        else if (_selectSpells.currentSpell == "Mana Cube" && currentMana >= 25)
             {
                 StartCoroutine(ShootProjectile("Mana Cube", 5f));
                 EveryCastDoesThis(25,0.5f);
             }
-        else if (_selectSpells.currentSpell == "Glyph of Volatility" && mana >= 20)
+        else if (_selectSpells.currentSpell == "Glyph of Volatility" && currentMana >= 20)
             {
                 StartCoroutine(ShootProjectile("Glyph of Volatility", 0));
                 EveryCastDoesThis(20,2);
             }
-        else if (_selectSpells.currentSpell == "Lightning Bolt" && mana >= 10)
+        else if (_selectSpells.currentSpell == "Lightning Bolt" && currentMana >= 10)
             {
                 EveryCastDoesThis(10,2);
             }
-        else if (_selectSpells.currentSpell == "Ice Shard" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Ice Shard" && currentMana >= 15)
             {
                 StartCoroutine(ShootProjectile("Ice Shard", 50f));
                 EveryCastDoesThis(15,2);
             }
-        else if (_selectSpells.currentSpell == "Snowball" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Snowball" && currentMana >= 15)
             {
                 StartCoroutine(ShootProjectile("Snowball", 30f));
                 EveryCastDoesThis(15,2);
             }
-        else if (_selectSpells.currentSpell == "Polymorph: Disc" && mana >= 15)
+        else if (_selectSpells.currentSpell == "Polymorph: Disc" && currentMana >= 15)
             if (floatingDiscCount < 3)
             {
                 Polymorph("Disc", 20f, 15f+spellCharge);
@@ -212,30 +217,27 @@ public class SpellShooter : MonoBehaviour
             {
                 Debug.Log(floatingDiscCount+" is too many floating discs to create another, cast failed!");
             }
-        else if (_selectSpells.currentSpell == "Heal" && mana >= 30)
+        else if (_selectSpells.currentSpell == "Heal" && currentMana >= 30)
             {
-                var health = GetComponentInParent<HealthSystem>();
-                if (health != null && health.CurrentHealth != 100f) //max health check
+                if (TryGetComponent<HealthSystem>(out var health) && health.CurrentHealth != 100f) //max health check
                 {
-                    health.Heal(Time.deltaTime); //may change
-                    mana -= Time.deltaTime*5f;
-                    manaRegenStunTimer = 0.5f;
+                    health.Heal(10*spellCharge); //may change
                 }
-                StartCoroutine(ResetCanShoot(2));
+                EveryCastDoesThis(0f,0f);
             }
-        else if (_selectSpells.currentSpell == "Shield" && mana >= 20)
+        else if (_selectSpells.currentSpell == "Shield" && currentMana >= 20)
             {
                 shieldTimer = 5f; // shield lasts for 5 seconds
                 EveryCastDoesThis(20,2);
             }
-        else if (_selectSpells.currentSpell == "Vine Grapple" && mana >= 25)
+        else if (_selectSpells.currentSpell == "Vine Grapple" && currentMana >= 25)
             {
                 EveryCastDoesThis(25,2);
             }
-        else if (_selectSpells.currentSpell == "Psionic Grasp" && mana >=1)
+        else if (_selectSpells.currentSpell == "Psionic Grasp" && currentMana >=1)
             {
                 //Put in the half life phys gun basically
-                mana -= Time.deltaTime;
+                currentMana -= Time.deltaTime;
                 manaRegenStunTimer = 0.5f;
                 timeSinceShot = 0f;
                 _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
@@ -243,7 +245,7 @@ public class SpellShooter : MonoBehaviour
             }
         else if (_selectSpells.currentSpell != "No Spell")
             {
-                Debug.Log("Not enough mana to cast " + currentSpell + "! Remaining Mana: " + (mana));
+                Debug.Log("Not enough currentMana to cast " + currentSpell + "! Remaining currentMana: " + (currentMana));
                 _selectSpells.spellResetTimer = 10f;
                 StartCoroutine(ResetCanShoot(2));
             }
@@ -251,12 +253,11 @@ public class SpellShooter : MonoBehaviour
 
     void AltCastSpell()
     {
-        
-        if  (mana > 0f)
+        if  (currentMana > 0f)
         {
-            if (_selectSpells.currentSpell == "Knockblast" || _selectSpells.currentSpell == "Mana Cube" || _selectSpells.currentSpell == "Polymorph: Disc")
+            if (_selectSpells.currentSpell == "Knockblast" || _selectSpells.currentSpell == "Mana Cube" || _selectSpells.currentSpell == "Polymorph: Disc" || _selectSpells.currentSpell == "Heal")
             {
-                mana -= 5f*Time.deltaTime;
+                currentMana -= 5f*Time.deltaTime;
                 spellCharge += Time.deltaTime;
                 manaRegenStunTimer = 0.5f;
             }
@@ -266,11 +267,15 @@ public class SpellShooter : MonoBehaviour
     void EveryCastDoesThis(float manaCost, float fireRate)
     {
         StartCoroutine(ResetCanShoot(fireRate));
-        mana -= manaCost;
+        currentMana -= manaCost;
         timeSinceShot = 0f;
         _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
         _selectSpells.spellResetTimer = 10f;
-        Debug.Log("Casting "+ _selectSpells.currentSpell + "! Remaining Mana: " + (mana));
+        if (HUD != null)
+        {
+            HUD.UpdateManaUI(currentMana, maxMana);
+        }
+        Debug.Log("Casting "+ _selectSpells.currentSpell + "! Remaining currentMana: " + (currentMana));
     }
 
     IEnumerator ShootProjectile(string spellName, float launchForce)
@@ -360,25 +365,33 @@ public class SpellShooter : MonoBehaviour
             if (polymorpher != null && polymorpher._canPolymorph == true)
             {
                 polymorpher.TriggerPolymorphation(prefab, duration, spawnUpright);
-                mana -= manaCost;
+                currentMana -= manaCost;
             }
             else if (target.CompareTag("Polymorph form"))
             {
-                mana -= manaCost;
+                currentMana -= manaCost;
                 Debug.Log("Polymorph duration extended!");
                 polymorpher = target.GetComponentInParent<Polymorphable>();
                 polymorpher.TriggerPolymorphation(prefab, duration, spawnUpright);
             }
             else
             {
-                Debug.Log("Can't polymorph "+target+"! Mana was not deducted!");
+                Debug.Log("Can't polymorph "+target+"! currentMana was not deducted!");
             }
         }
     }
 
     IEnumerator ResetCanShoot(float fireRate)
     {
-        yield return new WaitForSeconds(1/fireRate); // wait for 1/firerate seconds
-        canShoot = true; // allow shooting again after the stun duration
+        if (fireRate > 0f)
+        {
+            yield return new WaitForSeconds(1/fireRate); // wait for 1/firerate seconds
+            canShoot = true; // allow shooting again after the stun duration
+        }
+        else if (fireRate <= 0f)
+        {
+            yield return new WaitForSeconds(0f);
+            canShoot = true;
+        }
     }
 }

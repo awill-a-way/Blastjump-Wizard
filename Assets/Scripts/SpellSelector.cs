@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellSelector : MonoBehaviour
 {
     private PlayerInputActions _inputActions;
+    private HUDController HUD;
     //private SpellShooting _shootSpells;
 
     public List<string> inputBuffer = new List<string>();
@@ -25,6 +26,10 @@ public class SpellSelector : MonoBehaviour
     [SerializeField] private string previousSpell = "No Spell";
     [SerializeField] private bool prevSpellEnabled;
     [SerializeField] private bool altSpellInputsEnabled;
+    [Space]
+    [SerializeField] private GameObject knockblastHandVisual;
+    [SerializeField] private GameObject manaCubeHandVisual;
+    [SerializeField] private GameObject discHandVisual;
 
 
 
@@ -34,6 +39,7 @@ public class SpellSelector : MonoBehaviour
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
 
+        HUD = GetComponentInChildren<HUDController>();
         //_shootSpells = GetComponent<SpellShooting>();
     }
 
@@ -48,17 +54,17 @@ public class SpellSelector : MonoBehaviour
 
         if (enableSpellInput == true)
         {
-            if (input.SpellUp.WasPressedThisFrame()) AddInput("U");
-            if (input.SpellDown.WasPressedThisFrame()) AddInput("D");
-            if (input.SpellLeft.WasPressedThisFrame()) AddInput("L");
-            if (input.SpellRight.WasPressedThisFrame()) AddInput("R");
+            if (input.SpellUp.WasPressedThisFrame()) AddRune("U");
+            if (input.SpellDown.WasPressedThisFrame()) AddRune("D");
+            if (input.SpellLeft.WasPressedThisFrame()) AddRune("L");
+            if (input.SpellRight.WasPressedThisFrame()) AddRune("R");
 
             if (input.Spellbook.IsPressed() == true || altSpellInputsEnabled == true)
             {
-                if (input.AltSpellUp.WasPressedThisFrame()) AddInput("U");
-                if (input.AltSpellDown.WasPressedThisFrame()) AddInput("D");
-                if (input.AltSpellLeft.WasPressedThisFrame()) AddInput("L");
-                if (input.AltSpellRight.WasPressedThisFrame()) AddInput("R");
+                if (input.AltSpellUp.WasPressedThisFrame()) AddRune("U");
+                if (input.AltSpellDown.WasPressedThisFrame()) AddRune("D");
+                if (input.AltSpellLeft.WasPressedThisFrame()) AddRune("L");
+                if (input.AltSpellRight.WasPressedThisFrame()) AddRune("R");
             }
         }
 
@@ -66,6 +72,8 @@ public class SpellSelector : MonoBehaviour
         {
             inputBufferResetTimer = 0f;
             currentSpell = "";
+            HUD.UpdateSpellInputUI(string.Join(" ", inputBuffer), currentSpell);
+            UpdateSpellHandVisual();
         }
 
         //Reset spell if you havent casted in a little bit  (currently removed)
@@ -78,7 +86,7 @@ public class SpellSelector : MonoBehaviour
 
         if (inputStunTimer > 0f)
         {
-            inputStunTimer -= Time.deltaTime;
+            inputStunTimer -= Time.deltaTime/Time.timeScale;
             enableSpellInput = false;
             //Debug.Log("Spell Inputs Disabled! Time Remaining:" + spellResetTimer);
         }
@@ -100,6 +108,8 @@ public class SpellSelector : MonoBehaviour
         if (inputBufferResetTimer <= 0f && inputBuffer.Count > 0)
         {
             inputBuffer.Clear();
+            HUD.UpdateSpellInputUI(string.Join(" ", inputBuffer), currentSpell);
+            UpdateSpellHandVisual();
             Debug.Log("Input Timer reached zero, Input Buffer Cleared");
         }
 
@@ -119,12 +129,14 @@ public class SpellSelector : MonoBehaviour
         }
     }
 
-    void AddInput(string _input)
+    void AddRune(string _input)
     {
         if (enableSpellInput == true)
         {
             inputBuffer.Add(_input);
             inputBufferResetTimer = inputBufferResetTime; // reset the timer whenever a new input is added
+            
+            HUD.UpdateSpellInputUI(string.Join(" ", inputBuffer), currentSpell);
             Debug.Log("Input Buffer: " + string.Join(", ", inputBuffer));
 
             if (currentSpell != "No Spell" && currentSpell != "")
@@ -134,61 +146,62 @@ public class SpellSelector : MonoBehaviour
             currentSpell = "No Spell";
 
             CheckSpell();
+            UpdateSpellHandVisual();
         }
     }
 
     void CheckSpell()
     {
-        string spell = string.Join("", inputBuffer);
+        string runes = string.Join("", inputBuffer);
 
-        if(spell == "RRUU")
+        if(runes == "RRUU")
         {
             SelectSpell("Knockblast");
         }
-        else if(spell == "DRRR")
+        else if(runes == "DRRR")
         {
             SelectSpell("Mana Cube");
         }
-        else if (spell == "LLRR")
+        else if (runes == "LLRR")
         {
             SelectSpell("Polymorph: Disc");
         }
-        else if (spell == "RRDU")
+        else if (runes == "RRDU")
         {
             SelectSpell("Glyph of Volatility");
         }
-        else if (spell == "URURUR")
+        else if (runes == "URURUR")
         {
             SelectSpell("Lightning Bolt");
         }
-        else if (spell == "RRRR")
+        else if (runes == "RRRR")
         {
             SelectSpell("Ice Shard");
         }
-        else if (spell == "URDL")
+        else if (runes == "URDL")
         {
             SelectSpell("Snowball");
         }
-        else if (spell == "LUUR")
+        else if (runes == "LUUR")
         {
             SelectSpell("Heal");
         }
-        else if (spell == "LRLR")
+        else if (runes == "LRLR")
         {
             SelectSpell("Shield");
         }
-        else if (spell == "RRRL")
+        else if (runes == "RRRL")
         {
             SelectSpell("Vine Grapple");
         }
-        else if (spell == "UULR")
+        else if (runes == "UULR")
         {
             SelectSpell("Psionic Grasp");
         }
-        else if (spell.Length >= 6)
+        else if (runes.Length >= 6)
         {
+            SelectSpell("No Spell");
             Debug.Log("No spell matched!");
-            inputBuffer.Clear();
         }
     }
 
@@ -198,11 +211,62 @@ public class SpellSelector : MonoBehaviour
         {
             previousSpell = currentSpell;
         }
-        currentSpell = spellName;
         
+        currentSpell = spellName;
         Debug.Log(currentSpell+" Selected! Previous spell was "+previousSpell);
+
         inputBuffer.Clear();
         inputStunTimer = inputStunTime;
         //spellResetTimer = 10f;
+
+        UpdateSpellHandVisual();
+
+        StartCoroutine(RuneTextLinger(0.5f));
+    }
+
+    void UpdateSpellHandVisual()
+    {
+        GameObject spellHandVisual = currentSpell switch
+        {
+            "Knockblast" => knockblastHandVisual,
+            "Mana Cube" => manaCubeHandVisual,
+            "Polymorph: Disc" => discHandVisual,
+            _ => null
+        };
+
+        //Disable whatever is active first
+        DisableSpellHandVisual(knockblastHandVisual);
+        DisableSpellHandVisual(manaCubeHandVisual);
+        DisableSpellHandVisual(discHandVisual);
+
+        //Then activate the right visual
+        EnableSpellHandVisual(spellHandVisual);
+    }
+
+    void EnableSpellHandVisual(GameObject spellHandVisual)
+    {
+        if (spellHandVisual != null)
+        {
+            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == false) mr.enabled = true;
+        }
+    }
+
+    void DisableSpellHandVisual(GameObject spellHandVisual)
+    {
+        if (spellHandVisual != null)
+        {
+            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == true) mr.enabled = false;
+        }
+    }
+    
+    IEnumerator RuneTextLinger(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        string runes = string.Join("", inputBuffer);
+        if (runes.Length <= 0f)
+        {
+            HUD.UpdateSpellInputUI(string.Join(" ", inputBuffer), currentSpell);
+        }
     }
 }

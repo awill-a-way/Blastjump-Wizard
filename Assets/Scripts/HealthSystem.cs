@@ -42,13 +42,7 @@ public class HealthSystem : MonoBehaviour
         Debug.Log("Damage:" + damage);
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0f, maxHealth);
         OnHealthChanged?.Invoke(this);
-        if (isPlayer)
-        {
-            //if (HealthBar.Fill)
-            {
-            //    HealthBar.Fill.value = CurrentHealth / maxHealth;
-            }
-        }
+        OnPlayerHealthChange();
 
         if (CurrentHealth <= 0f)
         {
@@ -63,6 +57,7 @@ public class HealthSystem : MonoBehaviour
 
         CurrentHealth = 0f;
         OnHealthChanged?.Invoke(this);
+        OnPlayerHealthChange();
         Die();
     }
 
@@ -93,6 +88,7 @@ public class HealthSystem : MonoBehaviour
         
         CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0f, maxHealth);
         OnHealthChanged?.Invoke(this);
+        OnPlayerHealthChange();
     }
 
     public void RestoreToFull()
@@ -101,6 +97,7 @@ public class HealthSystem : MonoBehaviour
 
         CurrentHealth = maxHealth;
         OnHealthChanged?.Invoke(this);
+        OnPlayerHealthChange();
     }
 
     public void SetMaxHealth(float newMax, bool refill = true)
@@ -112,6 +109,7 @@ public class HealthSystem : MonoBehaviour
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, maxHealth);
         
         OnHealthChanged?.Invoke(this);
+        OnPlayerHealthChange();
     }
 
     public void MakeInvulnerableTemporarily(float duration)
@@ -167,6 +165,18 @@ public class HealthSystem : MonoBehaviour
             
             yield return new WaitForSeconds(1/ticksPerSecond);
             StartCoroutine(RepeatDamageEveryTick(damagePerTick, ticksPerSecond, ticksLeft));
+        }
+    }
+
+    private void OnPlayerHealthChange()
+    {
+        if (isPlayer)
+        {
+            var HUD = GetComponentInChildren<HUDController>();
+            if (HUD != null) 
+            {
+                HUD.UpdateHealthUI(CurrentHealth, MaxHealth);
+            }
         }
     }
 }
