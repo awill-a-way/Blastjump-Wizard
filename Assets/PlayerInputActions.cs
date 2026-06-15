@@ -253,6 +253,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""cefc3d7a-64d8-4b66-a893-c21e59122536"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -519,6 +528,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""AltSpellRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3646d9b-761c-445b-960e-495fb03f3ccd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -545,6 +565,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay_AltSpellDown = m_Gameplay.FindAction("AltSpellDown", throwIfNotFound: true);
         m_Gameplay_AltSpellLeft = m_Gameplay.FindAction("AltSpellLeft", throwIfNotFound: true);
         m_Gameplay_AltSpellRight = m_Gameplay.FindAction("AltSpellRight", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -643,6 +664,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_AltSpellDown;
     private readonly InputAction m_Gameplay_AltSpellLeft;
     private readonly InputAction m_Gameplay_AltSpellRight;
+    private readonly InputAction m_Gameplay_Interact;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -727,6 +749,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @AltSpellRight => m_Wrapper.m_Gameplay_AltSpellRight;
         /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Interact".
+        /// </summary>
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
@@ -806,6 +832,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @AltSpellRight.started += instance.OnAltSpellRight;
             @AltSpellRight.performed += instance.OnAltSpellRight;
             @AltSpellRight.canceled += instance.OnAltSpellRight;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         /// <summary>
@@ -871,6 +900,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @AltSpellRight.started -= instance.OnAltSpellRight;
             @AltSpellRight.performed -= instance.OnAltSpellRight;
             @AltSpellRight.canceled -= instance.OnAltSpellRight;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         /// <summary>
@@ -1037,5 +1069,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAltSpellRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Interact" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

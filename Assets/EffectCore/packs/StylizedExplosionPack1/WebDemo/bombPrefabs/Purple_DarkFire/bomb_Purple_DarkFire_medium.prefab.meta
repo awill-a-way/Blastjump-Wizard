@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 85a30b8a195075a4891a49ebe3b5a359
+timeCreated: 1483286451
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/bombPrefabs/Purple_DarkFire/bomb_Purple_DarkFire_medium.prefab
+  uploadId: 414040

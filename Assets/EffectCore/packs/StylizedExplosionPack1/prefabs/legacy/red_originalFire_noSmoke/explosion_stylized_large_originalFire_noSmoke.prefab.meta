@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0b0074ff9f3fc6c4c90891df7442ead4
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/legacy/red_originalFire_noSmoke/explosion_stylized_large_originalFire_noSmoke.prefab
+  uploadId: 414040

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e0d8b65e7a635549a73338410d5b27d
+timeCreated: 1478715991
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/scenes/StylizedExplosionPack1_ThrowBombs_mobile.unity
+  uploadId: 414040

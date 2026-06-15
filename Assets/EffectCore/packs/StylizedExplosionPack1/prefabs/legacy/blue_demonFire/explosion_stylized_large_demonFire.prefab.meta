@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 801c56597287a4a49b09aee4555278d6
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/legacy/blue_demonFire/explosion_stylized_large_demonFire.prefab
+  uploadId: 414040

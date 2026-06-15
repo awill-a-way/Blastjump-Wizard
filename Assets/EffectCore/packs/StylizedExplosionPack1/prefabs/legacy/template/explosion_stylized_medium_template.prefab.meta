@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8b20af3ffd4fbda4ca0104a347b43e6b
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/legacy/template/explosion_stylized_medium_template.prefab
+  uploadId: 414040

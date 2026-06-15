@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: efb4e6594b6b22547aafcffad40d944c
+timeCreated: 1478465332
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/WebDemoAssets/example_scene_environment/groundScrap.mat
+  uploadId: 414040

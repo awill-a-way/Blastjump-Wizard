@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 6437ea5fd3459a4428d0c7ef53fa5fb0
+timeCreated: 1515414380
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/WebDemoAssets/scripts/ECCameraShakeCaller.cs
+  uploadId: 414040

@@ -90,6 +90,10 @@ public class PlayerRespawner : MonoBehaviour
         {
             _health.Kill();
         }
+        if (UnityEngine.InputSystem.Keyboard.current.hKey.wasPressedThisFrame)
+        {
+            _health.RestoreToFull();
+        }
         #endif
     }
 }

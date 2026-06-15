@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6953d3cb5f8063445ba4fc2ede2dabd6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/ShaderGraphVersion/red_originalFire_ShaderGraph/explosion_stylized_large_originalFire_ShaderGraph.prefab
+  uploadId: 414040

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 612a98f832082a34d8011e740fa99ff8
+timeCreated: 1478437045
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/materials_StylizedExplosionPack1/fire/MeltingFire_additive.mat
+  uploadId: 414040

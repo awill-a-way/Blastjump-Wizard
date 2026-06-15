@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2c784ba8197c455488053dc78adf1d5c
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/mobile/template_mobile/explosion_stylized_large_template.prefab
+  uploadId: 414040

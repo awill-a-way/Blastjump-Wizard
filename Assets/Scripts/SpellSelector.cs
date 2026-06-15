@@ -40,6 +40,8 @@ public class SpellSelector : MonoBehaviour
         _inputActions.Enable();
 
         HUD = GetComponentInChildren<HUDController>();
+
+        UpdateSpellHandVisual();
         //_shootSpells = GetComponent<SpellShooting>();
     }
 
@@ -153,51 +155,23 @@ public class SpellSelector : MonoBehaviour
     void CheckSpell()
     {
         string runes = string.Join("", inputBuffer);
+        string spellName = runes switch
+        {
+            "RRUU" => "Knockblast",
+            "DRRR" => "Mana Cube",
+            "LLRR" => "Polymorph: Disc",
+            "RRDU" => "Glyph of Volatility",
+            "URURUR" => "Lightning Bolt",
+            "RRRR" => "Ice Shard",
+            "URDL" => "Snowball",
+            "LUUR" => "Heal",
+            "LRLR" => "Shield",
+            "RRRL" => "Vine Grapple",
+            "UULR" => "Psionic Grasp",
+            _ => null,
+        };
 
-        if(runes == "RRUU")
-        {
-            SelectSpell("Knockblast");
-        }
-        else if(runes == "DRRR")
-        {
-            SelectSpell("Mana Cube");
-        }
-        else if (runes == "LLRR")
-        {
-            SelectSpell("Polymorph: Disc");
-        }
-        else if (runes == "RRDU")
-        {
-            SelectSpell("Glyph of Volatility");
-        }
-        else if (runes == "URURUR")
-        {
-            SelectSpell("Lightning Bolt");
-        }
-        else if (runes == "RRRR")
-        {
-            SelectSpell("Ice Shard");
-        }
-        else if (runes == "URDL")
-        {
-            SelectSpell("Snowball");
-        }
-        else if (runes == "LUUR")
-        {
-            SelectSpell("Heal");
-        }
-        else if (runes == "LRLR")
-        {
-            SelectSpell("Shield");
-        }
-        else if (runes == "RRRL")
-        {
-            SelectSpell("Vine Grapple");
-        }
-        else if (runes == "UULR")
-        {
-            SelectSpell("Psionic Grasp");
-        }
+        if (spellName != null) SelectSpell(spellName);
         else if (runes.Length >= 6)
         {
             SelectSpell("No Spell");
@@ -247,7 +221,21 @@ public class SpellSelector : MonoBehaviour
     {
         if (spellHandVisual != null)
         {
-            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == false) mr.enabled = true;
+            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == false) 
+            {
+                mr.enabled = true;
+            }
+            else
+            {
+                var renderers = spellHandVisual.GetComponentsInChildren<MeshRenderer>(true);
+                foreach (var mrs in renderers)
+                    mrs.enabled = true;
+            }
+
+            if (spellHandVisual.TryGetComponent<LazySusan>(out var lzs) && lzs.enabled == false)
+            {
+                lzs.enabled = true;
+            }
         }
     }
 
@@ -255,7 +243,21 @@ public class SpellSelector : MonoBehaviour
     {
         if (spellHandVisual != null)
         {
-            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == true) mr.enabled = false;
+            if (spellHandVisual.TryGetComponent<MeshRenderer>(out var mr) && mr.enabled == true)
+            {
+                mr.enabled = false;
+            }
+            else
+            {
+                var renderers = spellHandVisual.GetComponentsInChildren<MeshRenderer>(true);
+                foreach (var mrs in renderers)
+                    mrs.enabled = false;
+            }
+
+            if (spellHandVisual.TryGetComponent<LazySusan>(out var lzs) && lzs.enabled == true)
+            {
+                lzs.enabled = false;
+            }
         }
     }
     

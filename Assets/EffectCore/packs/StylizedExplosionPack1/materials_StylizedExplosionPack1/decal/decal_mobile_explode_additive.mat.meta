@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f464259c42b03374c8d72dbe779745f4
+timeCreated: 1478463671
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/materials_StylizedExplosionPack1/decal/decal_mobile_explode_additive.mat
+  uploadId: 414040

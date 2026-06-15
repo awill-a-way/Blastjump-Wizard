@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Unity.VisualScripting;
 using System;
+using Unity.Mathematics;
 
 public class SpellShooter : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SpellShooter : MonoBehaviour
     private PlayerInputActions _inputActions;
     private SpellSelector _selectSpells;
     private Melee melee;
+    private Grappler grappler;
     private HUDController HUD;
     
     [SerializeField] private GameObject knockblastPrefab;
@@ -25,10 +27,10 @@ public class SpellShooter : MonoBehaviour
     private bool requestingAltCast = false;
     public float timeSinceShot = 0f;
     //private float shootCoyoteTimer = 0;
-    public float spellCharge = 1f;
+    public float spellCharge = 0f;
+    private float overloadThreshold = 3f;
     public Camera playerCamera;
     private float currentSpellTimer;
-    public float shieldTimer;
     [Range(0, 100)]
     public float currentMana = 100;
     private float maxMana = 100;
@@ -52,7 +54,9 @@ public class SpellShooter : MonoBehaviour
 
         melee = GetComponent<Melee>();
 
-        spellCharge = 1f;
+        grappler = GetComponent<Grappler>();
+
+        spellCharge = 0f;
 
         HUD = GetComponentInChildren<HUDController>();
     }
@@ -69,18 +73,30 @@ public class SpellShooter : MonoBehaviour
         {
             AttackCheck();
         }
+
+        if (grappler.holdingSomething == true)
+        {
+            _selectSpells.currentSpell = "No Spell";
+            _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
+        }
         
-        currentMana = Mathf.Min(currentMana, maxMana);
+        currentMana = Mathf.Clamp(currentMana, 0, maxMana);
+        spellCharge = Mathf.Clamp(spellCharge, 0, 10);
+        timeSinceShot = Mathf.Clamp(timeSinceShot, 0, 50);
 
         if (timeSinceShot > 5f)
         {
             rightHand = true;
         }
 
-        Mathf.Clamp(spellCharge, 1, 10);
-        Mathf.Clamp(timeSinceShot, 0, 50);
-
         HUD.UpdateManaUI(currentMana, maxMana);
+
+        #if UNITY_EDITOR
+        if (UnityEngine.InputSystem.Keyboard.current.mKey.wasPressedThisFrame)
+        {
+            currentMana = maxMana;
+        }
+        #endif
     }
 
     void LateUpdate()
@@ -103,13 +119,11 @@ public class SpellShooter : MonoBehaviour
         //Measure time since the last successful shot
         timeSinceShot += Time.deltaTime;
 
-        //Decrease knockblast charge
+        //Decrease spellCharge
         if (spellCharge > 0 && requestingAltCast == false)
         {
             spellCharge -= Time.deltaTime*0.5f;
         }
-        
-
 
         if (manaRegenStunTimer > 0)
         {
@@ -136,9 +150,9 @@ public class SpellShooter : MonoBehaviour
             }
         }
         
-        if (input.Fire1.IsPressed() && _selectSpells.currentSpell != "No Spell")
+        if (input.Fire1.IsPressed())
         {
-            if (canShoot == true)
+            if (canShoot == true && _selectSpells.currentSpell != "No Spell" && grappler.holdingSomething == false)
             {
                 canShoot = false; // prevent shooting again until the stun duration is over (may have to move for charged attacks)
                 CastSpell();
@@ -146,6 +160,11 @@ public class SpellShooter : MonoBehaviour
                 _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
                 StopCoroutine(melee.resetRoutine);
                 melee.PutMeleeOnCooldown(0.25f);
+            }
+            else if (grappler.holdingSomething == true)
+            {
+                grappler.Throw();
+                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
             }
         }
         
@@ -166,12 +185,20 @@ public class SpellShooter : MonoBehaviour
             requestingAltCast = false;
         }
 
-        if ((input.Fire1.IsPressed() && _selectSpells.currentSpell == "No Spell") || input.QuickMelee.IsPressed())
+        if ((input.Fire1.IsPressed() && _selectSpells.currentSpell == "No Spell" && grappler.holdingSomething == false) || input.QuickMelee.IsPressed())
         {
             if (melee.canMelee == true)
             {
                 melee.Strike();
                 _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
+            }
+        }
+
+        if (input.Interact.IsPressed() || (input.Fire2.IsPressed() && _selectSpells.currentSpell == "No Spell"))
+        {
+            if (grappler.holdingSomething == false)
+            {
+                grappler.Grab();
             }
         }
     }
@@ -186,7 +213,7 @@ public class SpellShooter : MonoBehaviour
         else if (_selectSpells.currentSpell == "Mana Cube" && currentMana >= 25)
             {
                 StartCoroutine(ShootProjectile("Mana Cube", 5f));
-                EveryCastDoesThis(25,0.5f);
+                EveryCastDoesThis(25,1f);
             }
         else if (_selectSpells.currentSpell == "Glyph of Volatility" && currentMana >= 20)
             {
@@ -217,24 +244,29 @@ public class SpellShooter : MonoBehaviour
             {
                 Debug.Log(floatingDiscCount+" is too many floating discs to create another, cast failed!");
             }
-        else if (_selectSpells.currentSpell == "Heal" && currentMana >= 30)
+        else if (_selectSpells.currentSpell == "Heal")
             {
                 if (TryGetComponent<HealthSystem>(out var health) && health.CurrentHealth != 100f) //max health check
                 {
-                    health.Heal(10*spellCharge); //may change
+                    health.Heal(10f*spellCharge); //may change
+                    spellCharge = 0f;
                 }
                 EveryCastDoesThis(0f,0f);
             }
-        else if (_selectSpells.currentSpell == "Shield" && currentMana >= 20)
+        else if (_selectSpells.currentSpell == "Shield")
             {
-                shieldTimer = 5f; // shield lasts for 5 seconds
-                EveryCastDoesThis(20,2);
+                if (TryGetComponent<HealthSystem>(out var health)) //max health check
+                {
+                    health.MakeInvulnerableTemporarily(2f*spellCharge); //may change
+                    spellCharge = 0f;
+                }
+                EveryCastDoesThis(0,2);
             }
         else if (_selectSpells.currentSpell == "Vine Grapple" && currentMana >= 25)
             {
                 EveryCastDoesThis(25,2);
             }
-        else if (_selectSpells.currentSpell == "Psionic Grasp" && currentMana >=1)
+        else if (_selectSpells.currentSpell == "Psionic Grasp" && currentMana > 0f)
             {
                 //Put in the half life phys gun basically
                 currentMana -= Time.deltaTime;
@@ -255,22 +287,31 @@ public class SpellShooter : MonoBehaviour
     {
         if  (currentMana > 0f)
         {
-            if (_selectSpells.currentSpell == "Knockblast" || _selectSpells.currentSpell == "Mana Cube" || _selectSpells.currentSpell == "Polymorph: Disc" || _selectSpells.currentSpell == "Heal")
+            if (_selectSpells.currentSpell == "Knockblast" || _selectSpells.currentSpell == "Mana Cube" || _selectSpells.currentSpell == "Polymorph: Disc" || _selectSpells.currentSpell == "Heal" || _selectSpells.currentSpell == "Shield")
             {
-                currentMana -= 5f*Time.deltaTime;
+                currentMana -= 5f*Time.deltaTime*(1+spellCharge);
                 spellCharge += Time.deltaTime;
                 manaRegenStunTimer = 0.5f;
             }
+        }
+
+        if(spellCharge >= overloadThreshold && _selectSpells.currentSpell == "Knockblast")
+        {
+            spellCharge -= overloadThreshold;
+            OverloadBlast("Knockblast");
         }
     }
 
     void EveryCastDoesThis(float manaCost, float fireRate)
     {
         StartCoroutine(ResetCanShoot(fireRate));
+        
         currentMana -= manaCost;
-        timeSinceShot = 0f;
+        
         _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
         _selectSpells.spellResetTimer = 10f;
+        timeSinceShot = 0f;
+
         if (HUD != null)
         {
             HUD.UpdateManaUI(currentMana, maxMana);
@@ -291,7 +332,6 @@ public class SpellShooter : MonoBehaviour
         else
             projectileDestination = ray.GetPoint(1000);
 
-        // Decide which hand to fire from
         if(rightHand)
         {
             rightHand = false;
@@ -332,9 +372,13 @@ public class SpellShooter : MonoBehaviour
             projectileObj.GetComponent<Rigidbody>().linearVelocity = (projectileDestination - firepoint.position).normalized * (launchForce + _playerCharacter.GetState().Velocity.magnitude);
             if (projectileObj.TryGetComponent<HealthSystem>(out var health))
             {
-                health.SetMaxHealth((100f+spellCharge*10f), true);
+                health.SetMaxHealth((100f + spellCharge*10f), true);
             }
-            
+            if (projectileObj.TryGetComponent<Rocket>(out var rocket))
+            {
+                rocket.rocketStrength += spellCharge*0.5f;
+                rocket.isPlayerRocket = true;
+            }
         }
 
         spellCharge = 0f;
@@ -381,6 +425,27 @@ public class SpellShooter : MonoBehaviour
         }
     }
 
+    void OverloadBlast(string spellName)
+    {
+        currentMana -= 20f;
+        
+        GameObject prefab = spellName switch
+        {
+            "Knockblast" => knockblastPrefab,
+            _ => null
+        };
+
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+        GameObject overloadedRocket = Instantiate(prefab, ray.GetPoint(2f), Quaternion.identity);
+        var rocket = overloadedRocket.GetComponent<Rocket>();
+        rocket.rocketStrength = overloadThreshold*0.5f;
+        rocket.isPlayerRocket = true;
+        rocket.Detonate(overloadedRocket.transform.position);
+
+        Debug.Log("Overload blast!");
+    }
+
     IEnumerator ResetCanShoot(float fireRate)
     {
         if (fireRate > 0f)
@@ -388,9 +453,9 @@ public class SpellShooter : MonoBehaviour
             yield return new WaitForSeconds(1/fireRate); // wait for 1/firerate seconds
             canShoot = true; // allow shooting again after the stun duration
         }
-        else if (fireRate <= 0f)
+        else 
         {
-            yield return new WaitForSeconds(0f);
+            yield return new WaitForSeconds(0.01f); // wait for a very small period of time
             canShoot = true;
         }
     }

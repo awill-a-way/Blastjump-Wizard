@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8844d6cef22eb9a40bf97cadf56f43e4
+ScriptedImporter:
+  fileIDToRecycleName:
+    4800000: MainAsset
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/shader/alphaBlend_glow_shadergraph.ShaderGraph
+  uploadId: 414040

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 75f3247cdfebd194c9a562eb52f55b5e
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/mobile/funkyMix_jokerFire_mobile/explosionMobile_stylized_small_jokerFire.prefab
+  uploadId: 414040

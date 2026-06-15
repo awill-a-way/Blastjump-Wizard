@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [Space]
     [SerializeField] private Volume volume;
     [SerializeField] private StanceVignette stanceVignette;
+    [SerializeField] private bool toggleCrouchEnabled = false;
 
     private PlayerInputActions _inputActions;
 
@@ -64,9 +65,20 @@ public class Player : MonoBehaviour
             characterInput.Jump = false;
             characterInput.JumpSustain = false;
         }
-        characterInput.Crouch = input.Crouch.WasPressedThisFrame()
-            ? CrouchInput.Toggle
-            : CrouchInput.None;
+        
+        if (toggleCrouchEnabled == true)
+        {
+            characterInput.Crouch = input.Crouch.WasPressedThisFrame()
+                ? CrouchInput.Toggle
+                : CrouchInput.None;
+        }
+        else
+        {
+            characterInput.Crouch = input.Crouch.IsPressed()
+                ? CrouchInput.Hold
+                : CrouchInput.Unhold;
+        }
+
 
         playerCharacter.UpdateInput(characterInput);
         playerCharacter.UpdateBody(deltaTime);

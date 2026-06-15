@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b30b885edd0d0854cb682dd426c994fd
+timeCreated: 1478465332
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/material/bombType/bomb_green.mat
+  uploadId: 414040

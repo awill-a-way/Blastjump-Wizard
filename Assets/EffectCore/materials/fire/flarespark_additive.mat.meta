@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d4efe2e7e01f2a408fa16199f23230d
+timeCreated: 1478437045
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/materials/fire/flarespark_additive.mat
+  uploadId: 414040

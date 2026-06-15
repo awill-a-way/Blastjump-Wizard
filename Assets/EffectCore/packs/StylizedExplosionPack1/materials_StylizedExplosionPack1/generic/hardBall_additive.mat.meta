@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cb9a3e85eb3bdbc4a987eb2d859c8cbd
+timeCreated: 1478435619
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/materials_StylizedExplosionPack1/generic/hardBall_additive.mat
+  uploadId: 414040

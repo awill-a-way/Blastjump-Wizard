@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 59018c0b9610a144f9d140f595ea5d62
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/ShaderGraphVersion/green_wildFire_ShaderGraph/explosion_stylized_small_wildFire_ShaderGraph.prefab
+  uploadId: 414040

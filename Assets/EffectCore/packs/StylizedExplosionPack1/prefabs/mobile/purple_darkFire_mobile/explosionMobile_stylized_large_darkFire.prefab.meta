@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b456532398a9c814da16d73e1629a99f
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/mobile/purple_darkFire_mobile/explosionMobile_stylized_large_darkFire.prefab
+  uploadId: 414040

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba94e703cb800d141a963931f0e5baa7
+timeCreated: 1478465332
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/material/bombType/bomb_blue.mat
+  uploadId: 414040

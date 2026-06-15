@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8826fd366dfceef448bf4a2f359bc362
+timeCreated: 1482417269
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/shader/alphaBlend_depthBlend_glow.shader
+  uploadId: 414040

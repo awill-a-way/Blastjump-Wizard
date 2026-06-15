@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8b2c2e1e50574e445b8f2bd2ba990c43
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/mobile/blue_demonFire_mobile/explosionMobile_stylized_medium_demonFire.prefab
+  uploadId: 414040

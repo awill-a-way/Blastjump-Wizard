@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d6a4ff60fd09914fa24631e5ad080f2
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/ShaderGraphVersion/funkyMix_jokerFire_ShaderGraph/explosion_stylized_medium_jokerFire_ShaderGraph.prefab
+  uploadId: 414040

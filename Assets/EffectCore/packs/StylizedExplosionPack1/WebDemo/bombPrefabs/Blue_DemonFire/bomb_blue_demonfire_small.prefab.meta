@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f5410d374804a934da413d38db143931
+timeCreated: 1483286451
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/bombPrefabs/Blue_DemonFire/bomb_blue_demonfire_small.prefab
+  uploadId: 414040

@@ -4970,10 +4970,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e135ae1582b23c44a8fa726e30643e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  explosionVisual: {fileID: 0}
-  explosionRadius: 10
-  explosionForce: 50
-  explosiveDamage: 10
+  isPlayerRocket: 0
+  playerSelfDamageMultiplier: 0.5
+  explosionVisual: {fileID: 1000012903210382, guid: eee15e204a7a37247b5f1bde7bd9e333, type: 3}
+  collisionDamage: 10
+  baseExplosionRadius: 10
+  baseExplosionForce: 50
+  baseExplosiveDamage: 10
+  rocketStrength: 1
 --- !u!135 &157975274792811773
 SphereCollider:
   m_ObjectHideFlags: 0

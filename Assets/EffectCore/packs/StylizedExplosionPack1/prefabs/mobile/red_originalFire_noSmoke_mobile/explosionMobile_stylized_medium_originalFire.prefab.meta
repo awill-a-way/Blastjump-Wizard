@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a80483f3109c1644090dda4c0a490bf7
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/mobile/red_originalFire_noSmoke_mobile/explosionMobile_stylized_medium_originalFire.prefab
+  uploadId: 414040

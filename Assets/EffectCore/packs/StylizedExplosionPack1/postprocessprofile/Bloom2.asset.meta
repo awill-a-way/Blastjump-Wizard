@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 13da1fa847279ca4dbcfa6761f177298
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/postprocessprofile/Bloom2.asset
+  uploadId: 414040

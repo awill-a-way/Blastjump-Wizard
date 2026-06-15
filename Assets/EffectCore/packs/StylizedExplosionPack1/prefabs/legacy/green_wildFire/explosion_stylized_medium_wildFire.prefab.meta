@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6d6595919b8c8e14799852d449d5558b
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/legacy/green_wildFire/explosion_stylized_medium_wildFire.prefab
+  uploadId: 414040

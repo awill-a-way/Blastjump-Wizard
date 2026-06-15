@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 14fe9984834882c43b827e4197192a74
+timeCreated: 1483364994
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/scripts/ECparticleColorChangerMaster.cs
+  uploadId: 414040

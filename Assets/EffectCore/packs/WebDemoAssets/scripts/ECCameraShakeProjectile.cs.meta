@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 8fd6dcdcf07bb644abde2fade0426568
+timeCreated: 1512820034
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/WebDemoAssets/scripts/ECCameraShakeProjectile.cs
+  uploadId: 414040

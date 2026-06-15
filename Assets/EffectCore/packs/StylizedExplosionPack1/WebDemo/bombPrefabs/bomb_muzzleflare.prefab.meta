@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ace1113a61445654d8a9913ca6c7565a
+timeCreated: 1483285053
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/bombPrefabs/bomb_muzzleflare.prefab
+  uploadId: 414040

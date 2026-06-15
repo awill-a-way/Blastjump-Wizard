@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d612c22abf5d9743a874269740fa697
+timeCreated: 1483286451
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/WebDemo/bombPrefabs/Red_OriginalFire/bomb_Red_OriginalFire_small.prefab
+  uploadId: 414040

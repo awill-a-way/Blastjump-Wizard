@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 54038e9bab0efd44dbbdabb055fa2578
+timeCreated: 1478471388
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/WebDemoAssets/example_scene_environment/sphere.mat
+  uploadId: 414040

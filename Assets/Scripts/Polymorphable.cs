@@ -52,8 +52,12 @@ public class Polymorphable : MonoBehaviour
         {
             rb = GetComponentInChildren<Rigidbody>();
         }
-        _originalRigidbodyUseGravity = rb.useGravity;
-        _originalRigidbodyIsKinematic = rb.isKinematic;
+        
+        if (rb != null)
+        {
+            _originalRigidbodyUseGravity = rb.useGravity;
+            _originalRigidbodyIsKinematic = rb.isKinematic;
+        }
 
         if (mf) _originalMesh = mf.sharedMesh;
         if (mr) _originalMaterials = mr.sharedMaterials;

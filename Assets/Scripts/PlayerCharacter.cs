@@ -3,7 +3,7 @@ using KinematicCharacterController;
 
 public enum  CrouchInput
 {
-    None, Toggle
+    None, Toggle, Unhold, Hold 
 }
 
 public enum Stance
@@ -128,8 +128,8 @@ public class PlayerCharacter : MonoBehaviour, ICharacterController
         {
             CrouchInput.Toggle => !_requestedCrouch,
             CrouchInput.None => _requestedCrouch,
-            //CrouchInput.Crouch => true,
-            //CrouchInput.Uncrouch => false
+            CrouchInput.Hold => true,
+            CrouchInput.Unhold => false,
             _ => _requestedCrouch
         };
         if (_requestedCrouch && !wasRequestingCrouch)

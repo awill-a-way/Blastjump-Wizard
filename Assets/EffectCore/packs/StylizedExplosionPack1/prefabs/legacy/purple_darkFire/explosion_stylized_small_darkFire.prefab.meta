@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8349c206f5fe86c46a52b07e2642a6ea
+timeCreated: 1478716713
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 79037
+  packageName: Stylized Explosion Pack 1
+  packageVersion: 1.74
+  assetPath: Assets/EffectCore/packs/StylizedExplosionPack1/prefabs/legacy/purple_darkFire/explosion_stylized_small_darkFire.prefab
+  uploadId: 414040
