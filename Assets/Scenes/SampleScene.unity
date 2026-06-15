@@ -649,8 +649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0611abd6d10d0df41b7ded6487eb6459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grappleable
-  grappled: 0
+  bagged: 0
   canBeGrappled: 1
+  mr: {fileID: 0}
   c: {fileID: 0}
   rb: {fileID: 0}
   _originalRigidbodyUseGravity: 0
@@ -987,11 +988,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &452243759 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1592975380699577222, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
-  m_PrefabInstance: {fileID: 1115783893}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &483294556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,14 +1362,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1592975380699577222, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1592975380699577222, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2164982817496038476, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1414,10 +1402,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3682186025111092971, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
-      propertyPath: holdPoint
-      value: 
-      objectReference: {fileID: 452243759}
     - target: {fileID: 7779800637684613883, guid: 631fae51d9541f64f9d1f64a671b77b0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1818,6 +1802,7 @@ GameObject:
   - component: {fileID: 1410517455}
   - component: {fileID: 1410517454}
   - component: {fileID: 1410517459}
+  - component: {fileID: 1410517460}
   m_Layer: 0
   m_Name: Polymorph Test Sphere
   m_TagString: Untagged
@@ -1960,6 +1945,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1410517460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410517453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0611abd6d10d0df41b7ded6487eb6459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grappleable
+  bagged: 0
+  canBeGrappled: 0
+  mr: {fileID: 0}
+  c: {fileID: 0}
+  rb: {fileID: 0}
+  _originalRigidbodyUseGravity: 0
+  _originalRigidbodyIsKinematic: 0
 --- !u!1 &1523427451
 GameObject:
   m_ObjectHideFlags: 0

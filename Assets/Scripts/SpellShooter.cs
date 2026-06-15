@@ -11,7 +11,7 @@ public class SpellShooter : MonoBehaviour
     private PlayerInputActions _inputActions;
     private SpellSelector _selectSpells;
     private Melee melee;
-    private Grappler grappler;
+    private BagOfHolding _bag;
     private HUDController HUD;
     
     [SerializeField] private GameObject knockblastPrefab;
@@ -54,7 +54,7 @@ public class SpellShooter : MonoBehaviour
 
         melee = GetComponent<Melee>();
 
-        grappler = GetComponent<Grappler>();
+        _bag = GetComponent<BagOfHolding>();
 
         spellCharge = 0f;
 
@@ -71,14 +71,14 @@ public class SpellShooter : MonoBehaviour
     {
         if (_inputActions.Gameplay.Spellbook.IsPressed() == false)
         {
-            AttackCheck();
+            ActionCheck();
         }
 
-        if (grappler.holdingSomething == true)
-        {
-            _selectSpells.currentSpell = "No Spell";
-            _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
-        }
+        if (_inputActions.Gameplay.Slot1.WasPressedThisFrame()) _bag.SelectSlot(0);
+        if (_inputActions.Gameplay.Slot2.WasPressedThisFrame()) _bag.SelectSlot(1);
+        if (_inputActions.Gameplay.Slot3.WasPressedThisFrame()) _bag.SelectSlot(2);
+        if (_inputActions.Gameplay.Slot4.WasPressedThisFrame()) _bag.SelectSlot(3);
+        if (_inputActions.Gameplay.Slot5.WasPressedThisFrame()) _bag.SelectSlot(4);
         
         currentMana = Mathf.Clamp(currentMana, 0, maxMana);
         spellCharge = Mathf.Clamp(spellCharge, 0, 10);
@@ -137,22 +137,19 @@ public class SpellShooter : MonoBehaviour
         }
     }
 
-    void AttackCheck()
+    void ActionCheck()
     {
         var input = _inputActions.Gameplay;
         
-        if ( input.QuickMelee.IsPressed())
+        if (input.QuickMelee.IsPressed() && melee.canMelee == true)
         {
-            if (melee.canMelee == true)
-            {
-                melee.Strike();
-                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
-            }
+            melee.Strike();
+            _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
         }
         
         if (input.Fire1.IsPressed())
         {
-            if (canShoot == true && _selectSpells.currentSpell != "No Spell" && grappler.holdingSomething == false)
+            if (canShoot == true && _selectSpells.currentSpell != "No Spell")
             {
                 canShoot = false; // prevent shooting again until the stun duration is over (may have to move for charged attacks)
                 CastSpell();
@@ -160,11 +157,6 @@ public class SpellShooter : MonoBehaviour
                 _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
                 StopCoroutine(melee.resetRoutine);
                 melee.PutMeleeOnCooldown(0.25f);
-            }
-            else if (grappler.holdingSomething == true)
-            {
-                grappler.Throw();
-                _selectSpells.inputStunTimer = _selectSpells.inputStunTime;
             }
         }
         
@@ -185,7 +177,7 @@ public class SpellShooter : MonoBehaviour
             requestingAltCast = false;
         }
 
-        if ((input.Fire1.IsPressed() && _selectSpells.currentSpell == "No Spell" && grappler.holdingSomething == false) || input.QuickMelee.IsPressed())
+        if ((input.Fire1.IsPressed() && _selectSpells.currentSpell == "No Spell") || input.QuickMelee.IsPressed())
         {
             if (melee.canMelee == true)
             {
@@ -194,11 +186,22 @@ public class SpellShooter : MonoBehaviour
             }
         }
 
-        if (input.Interact.IsPressed() || (input.Fire2.IsPressed() && _selectSpells.currentSpell == "No Spell"))
+        if (input.UseBag.WasPressedThisFrame())
         {
-            if (grappler.holdingSomething == false)
+            if (_bag.selectedSlotEmpty == true)
             {
-                grappler.Grab();
+                Collider[] hits = Physics.OverlapSphere(playerCamera.transform.position, 5f);
+                foreach (Collider hit in hits)
+                {
+                    if(!hit.CompareTag("Player"))
+                    {
+                        _bag.Grab(hit.gameObject);
+                    }
+                }
+            }
+            else
+            {
+                _bag.Chuck(_playerCharacter.GetState().Velocity);
             }
         }
     }
@@ -327,10 +330,8 @@ public class SpellShooter : MonoBehaviour
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         
-        if(Physics.Raycast(ray, out hit))
-            projectileDestination = hit.point;
-        else
-            projectileDestination = ray.GetPoint(1000);
+        if(Physics.Raycast(ray, out hit)) projectileDestination = hit.point;
+        else projectileDestination = ray.GetPoint(1000);
 
         if(rightHand)
         {

@@ -1392,7 +1392,7 @@ Transform:
   m_GameObject: {fileID: 6664309582030722191}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.251, z: 1.193}
+  m_LocalPosition: {x: 0, y: 2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1912,9 +1912,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfed36a3122f534f97b91b2146259ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Grappler
-  holdingSomething: 0
   playerCamera: {fileID: 6354977920349266767}
   holdPoint: {fileID: 1592975380699577222}
+  selectedSlot: 0
+  selectedSlotEmpty: 0
+  baggedObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &7958740247488963030
 GameObject:
   m_ObjectHideFlags: 0

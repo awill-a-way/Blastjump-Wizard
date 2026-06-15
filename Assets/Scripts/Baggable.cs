@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Grappleable : MonoBehaviour
+public class Baggable : MonoBehaviour
 {
-    public bool grappled;
+    public bool bagged;
     public bool canBeGrappled;
+    [HideInInspector] public MeshRenderer mr;
     [HideInInspector] public Collider c;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public bool _originalRigidbodyUseGravity;
@@ -12,6 +13,12 @@ public class Grappleable : MonoBehaviour
     
     void Awake()
     {
+        mr = GetComponent<MeshRenderer>();
+        if (mr == null)
+        {
+            mr = GetComponentInChildren<MeshRenderer>();
+        }
+        
         c = GetComponent<Collider>();
         if (c == null)
         {
@@ -32,13 +39,13 @@ public class Grappleable : MonoBehaviour
     }
     void Start()
     {
-        grappled = false;
+        bagged = false;
         canBeGrappled = true;
     }
 
     void Update()
     {
-        if (grappled == true)
+        if (bagged == true)
         {
             canBeGrappled = false;
         }
